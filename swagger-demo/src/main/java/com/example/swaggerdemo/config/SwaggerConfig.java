@@ -14,7 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @Configuration
@@ -28,6 +27,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .enable(flag)
+                .groupName("超")
                 .select()// 通过.select()方法，去配置扫描接口,RequestHandlerSelectors配置如何扫描接口
                 // 通过方法上的注解扫描，如withMethodAnnotation(GetMapping.class)只扫描get请求
                 // 通过类上的注解扫描，如withClassAnnotation(Controller.class)只扫描有controller注解的类中的接口
@@ -47,5 +47,20 @@ public class SwaggerConfig {
                 , "Apache 2.0"
                 , "http://www.apache.org/licenses/LICENSE-2.0"
                 , new ArrayList());
+    }
+
+    @Bean
+    public Docket docket1(){
+        return new Docket(DocumentationType.SWAGGER_2).groupName("A");
+    }
+
+    @Bean
+    public Docket docket2(){
+        return new Docket(DocumentationType.SWAGGER_2).groupName("B");
+    }
+
+    @Bean
+    public Docket docket3(){
+        return new Docket(DocumentationType.SWAGGER_2).groupName("C");
     }
 }
